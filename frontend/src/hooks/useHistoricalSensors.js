@@ -16,7 +16,7 @@
 //     exportCSV: () => void,   // triggers browser download
 //   }
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import {
   db,
   collection,
@@ -83,8 +83,15 @@ export function useHistoricalSensors({
   const abortRef               = useRef(false);
 
   // Default range: last 24 hours
-  const start = startDate ?? new Date(Date.now() - 24 * 60 * 60 * 1000);
-  const end   = endDate   ?? new Date();
+  const start = useMemo(
+  () => startDate ?? new Date(Date.now() - 24 * 60 * 60 * 1000),
+  [startDate]
+);
+
+const end = useMemo(
+  () => endDate ?? new Date(),
+  [endDate]
+);
 
   const startTs = Math.floor(start.getTime() / 1000);
   const endTs   = Math.floor(end.getTime()   / 1000);
