@@ -11,7 +11,7 @@
 //   6. AlertsPage uses live alerts array.
 //   7. Everything else — layout, colours, components, nav — is unchanged.
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSensors }            from "./hooks/useSensors";
 import { useGPS }                from "./hooks/useGPS";
 import { useDetections }         from "./hooks/useDetections";
@@ -353,7 +353,7 @@ export default function SmartNileDashboard() {
   const { sensors, isLive: sensorsLive }         = useSensors(USE_FIREBASE);
   const { gps,     isLive: gpsLive }             = useGPS(USE_FIREBASE);
   const { detections, stats: detStats }          = useDetections(USE_FIREBASE);
-  const { alerts,  counts: alertCounts }         = useAlerts(USE_FIREBASE);
+  const { alerts } = useAlerts(USE_FIREBASE);  
   const heartbeat                                = useHeartbeat(USE_FIREBASE);
   const { latest: latestReport }                 = useReports(USE_FIREBASE);
   const sysStats                                 = useSystemStats(USE_FIREBASE);
