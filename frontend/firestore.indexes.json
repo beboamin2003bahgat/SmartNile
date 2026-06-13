@@ -1,0 +1,48 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "sensors",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "timestamp",  "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "sensors",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "mission_id", "order": "ASCENDING" },
+        { "fieldPath": "timestamp",  "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "gps",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "alerts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "detections",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "reports",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "generated_at_epoch", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

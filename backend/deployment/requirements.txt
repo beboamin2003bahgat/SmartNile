@@ -1,0 +1,56 @@
+# ============================================================
+# Smart Nile Backend — Python Dependencies
+# Raspberry Pi 5 / Ubuntu 24 / Debian Bookworm compatible
+# ============================================================
+# Install with:
+#   pip install -r requirements.txt --break-system-packages
+#
+# For a clean virtualenv instead:
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+# ============================================================
+
+# ── Firebase ─────────────────────────────────────────────────
+firebase-admin==6.5.0
+
+# ── Serial communication (Arduino + GPS) ─────────────────────
+pyserial==3.5
+
+# ── Computer Vision ──────────────────────────────────────────
+opencv-python-headless==4.10.0.84   # headless = no GUI, smaller footprint on RPi
+numpy==1.26.4
+
+# ── System monitoring ─────────────────────────────────────────
+psutil==6.0.0                        # CPU%, RAM, temp, battery for SystemMonitor
+
+# ── AI / TFLite (choose ONE block below) ─────────────────────
+# Option A — TFLite runtime only (recommended for RPi 5, ~2 MB)
+tflite-runtime==2.14.0
+
+# Option B — Full TensorFlow (uncomment if needed, ~500 MB)
+# tensorflow==2.16.1
+
+# Option C — Ultralytics YOLOv8 (comment out if using TFLite only)
+# ultralytics==8.2.0
+
+# ── Picamera2 (RPi Camera Module v2/v3) ──────────────────────
+# Installed via apt, not pip:
+#   sudo apt install -y python3-picamera2
+# Uncomment below only if installing in a venv:
+# picamera2==0.3.19
+
+# ── AI Advisor (LLM) ─────────────────────────────────────────
+google-generativeai==0.7.2    # Gemini
+openai==1.40.0                # OpenAI fallback
+
+# ── Data / Reports ───────────────────────────────────────────
+# csv, json, sqlite3 are stdlib — no extra packages needed
+
+# ── Testing ──────────────────────────────────────────────────
+pytest==8.2.2
+pytest-cov==5.0.0
+
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv==1.0.1     # optional — settings.py has its own .env parser
+                         # but python-dotenv is handy for scripts/debugging

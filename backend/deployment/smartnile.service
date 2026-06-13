@@ -1,0 +1,49 @@
+[Unit]
+Description=Smart Nile — Autonomous Water Monitoring Backend
+Documentation=https://github.com/your-org/smartnile
+After=network-online.target
+Wants=network-online.target
+# wait for serial devices to be ready
+After=dev-ttyUSB0.device dev-ttyAMA0.device
+# don't fail if devices aren't present (simulation mode)
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/smartnile/backend
+
+# ── environment ────────────────────────────────────────────────────────────
+EnvironmentFile=/home/pi/smartnile/.env
+Environment="PYTHONUNBUFFERED=1"
+
+# ── executable ─────────────────────────────────────────────────────────────
+# If using a virtualenv:
+#   ExecStart=/home/pi/smartnile/backend/.venv/bin/python main.py
+# If using system Python:
+ExecStart=/usr/bin/python3 /home/pi/smartnile/backend/main.py
+
+# ── restart policy ─────────────────────────────────────────────────────────
+Restart=on-failure
+RestartSec=10s
+StartLimitIntervalSec=120s
+StartLimitBurst=5
+
+# ── output ─────────────────────────────────────────────────────────────────
+# logs also go to data/logs/ via the rotating file handler
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=smartnile
+
+# ── resource limits ────────────────────────────────────────────────────────
+# Raspberry Pi 5 has 4–8 GB RAM; cap at 1.5 GB to leave headroom for OS
+MemoryMax=1536M
+CPUQuota=80%
+
+# ── graceful shutdown ──────────────────────────────────────────────────────
+TimeoutStopSec=30s
+KillMode=mixed
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
